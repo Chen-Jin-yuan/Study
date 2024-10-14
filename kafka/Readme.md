@@ -5,4 +5,5 @@ python=3.10.14
 * docker-compose up -d
 * docker-compose down 
 # check
-*  kafka-topics.sh --describe --bootstrap-server localhost:9092
+* docker exec -it {container id} /bin/bash
+* kafka-topics.sh --describe --bootstrap-server localhost:9092

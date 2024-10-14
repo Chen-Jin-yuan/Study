@@ -19,7 +19,7 @@ def decode_base64_to_image(base64_str):
 # 创建Kafka消费者
 consumer = KafkaConsumer(
     'test_topic',  # 主题名称
-    bootstrap_servers='localhost:9092',
+    bootstrap_servers='10.2.64.91:9092',
     group_id='my_group', # 设置消费者组
     key_deserializer=lambda k: k.decode('utf-8'),  # 解码字节为字符串
     value_deserializer=lambda v: json.loads(v.decode('utf-8'))  # 反序列化值

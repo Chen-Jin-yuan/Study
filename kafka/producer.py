@@ -15,7 +15,7 @@ def serialize_image_to_binary(image):
 
 # 创建Kafka生产者
 producer = KafkaProducer(
-    bootstrap_servers='localhost:9092',
+    bootstrap_servers='10.2.64.91:9092',
     key_serializer=lambda k: k.encode('utf-8'),  # 将字符串编码为字节
     value_serializer=lambda v: json.dumps(v).encode('utf-8')  # 序列化为JSON格式
 )
@@ -29,9 +29,9 @@ message_dict = {
     'image_base64_data': image_base64_data,  # 将图像序列化为Base64字符串
     'image_format': image_format
 }
-
-# 发送消息，指定键和值
-producer.send('test_topic', key="hello", value=message_dict)
+for i in range(10):
+    # 发送消息，指定键和值
+    producer.send('test_topic', key=f"hello-{i}", value=message_dict)
 
 print('Message sent to Kafka!')
 producer.close() # 关闭生产者
