@@ -2,6 +2,7 @@ from kafka import KafkaConsumer
 from PIL import Image
 import time
 import pickle
+from msg import Msg
 
 # 创建Kafka消费者
 consumer = KafkaConsumer(
@@ -32,13 +33,14 @@ while True:
             value = message.value  # 反序列化后的值
             print(value)
             # 获取文本信息
-            text_message = value['text']
+            text_message = value.input_data['text']
             print(f'Received text: {text_message} with key: {key}')
 
-            image = value['image']
-            image_format = value['image_format']
+            image = value.input_data['image']
+            image_format = value.input_data['image_format']
             image.save(f'received_image.{image_format}')  # 保存到文件
             print(f'Image received {image_format} from Kafka!')
+            print(value.key)
 
     # 手动提交偏移量
     # Kafka 默认会使用自动提交的机制（如果配置了 enable.auto.commit=true），在设置的时间间隔后自动提交偏移量。
