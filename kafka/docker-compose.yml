@@ -20,6 +20,9 @@ services:
       - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
       # 外部机器使用的ip访问
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://10.2.64.75:9092
+      # 设置最大消息大小为100MB，默认为1MB
+      - KAFKA_MESSAGE_MAX_BYTES=104857600  # 设置为 50 MB
+      - KAFKA_REPLICA_FETCH_MAX_BYTES=104857600
     ports:
       - "9092:9092"
     depends_on:
